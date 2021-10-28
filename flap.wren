@@ -54,15 +54,18 @@ class Animation {
 	}
 	pause {_paused = true}
 	resume {_paused = false}
+	onLoop=(value) {_onLoop = value}
 
 	update() {
 		if (_paused) return
 		_timer = _timer + 1
 		_frame = _frames[((_timer / 60) / (_rate/1000) % _frames.count).floor]
-		var loop = (_frame != _lastFrame) && (_frame == _frames[0])
+		var loop = (_frame != _lastFrame) && (_frame == _frames[_frames.count - 1])
 		_loops = _loops + (loop && 1 || 0)
+		if (loop) System.print(_loops)
 		_lastFrame = _frame
 		_lastTime = _timer
+		if (loop && _onLoop is Fn) _onLoop.call()
 	}
 
 	draw(image, x, y) {image.drawArea(_grid.getX(_frame), _grid.getY(_frame), _grid.frameWidth, _grid.frameHeight, x, y)}
