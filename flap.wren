@@ -62,7 +62,6 @@ class Animation {
 		_frame = _frames[((_timer / 60) / (_rate/1000) % _frames.count).floor]
 		var loop = (_frame != _lastFrame) && (_frame == _frames[_frames.count - 1])
 		_loops = _loops + (loop && 1 || 0)
-		if (loop) System.print(_loops)
 		_lastFrame = _frame
 		_lastTime = _timer
 		if (loop && _onLoop is Fn) _onLoop.call()
