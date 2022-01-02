@@ -21,6 +21,7 @@ class Grid {
 	}
 	getX(frame) {(frame % _spritesPerRow) * _frameWidth}
 	getY(frame) {(frame / _spritesPerRow).floor * _frameWidth}
+	count {(_imageWidth / _frameWidth) * (_imageHeight / _frameHeight)}
 }
 
 class SpriteSheet {
